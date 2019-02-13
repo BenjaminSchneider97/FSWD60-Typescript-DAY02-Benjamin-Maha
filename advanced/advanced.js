@@ -24,36 +24,81 @@ var vehicles = /** @class */ (function () {
         this.seats = seats;
         this.kilometers = kilometers;
     }
+    vehicles.prototype.infos = function () {
+        return "The production Year is " + this.productionYear + ".<br>\n\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
+    };
     return vehicles;
 }());
+var test = new vehicles("2010", "bmw", "black", "4", "100000");
+document.write(test.infos());
+var Motorbike = /** @class */ (function (_super) {
+    __extends(Motorbike, _super);
+    function Motorbike(year, model, color, seats, kilometers, engine) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+        _this.engine = "";
+        _this.engine = engine;
+        return _this;
+    }
+    Motorbike.prototype.motorOutput = function () {
+        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.engine + " engine.";
+    };
+    return Motorbike;
+}(vehicles));
+var motortest = new Motorbike("2009", "honda", "black", "1", "20000", "good");
+document.write(motortest.motorOutput());
+var Truck = /** @class */ (function (_super) {
+    __extends(Truck, _super);
+    function Truck(year, model, color, seats, kilometers, engine) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+        _this.engine = "";
+        _this.engine = engine;
+        return _this;
+    }
+    return Truck;
+}(vehicles));
 var cars = /** @class */ (function (_super) {
     __extends(cars, _super);
-    function cars() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function cars(year, model, color, seats, kilometers, engine, horsepower) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
         _this.engine = "";
         _this.horsepower = "";
+        _this.engine = engine;
+        _this.horsepower = horsepower;
         return _this;
     }
     return cars;
 }(vehicles));
-var bike = /** @class */ (function (_super) {
-    __extends(bike, _super);
-    function bike() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var bicycle = /** @class */ (function (_super) {
+    __extends(bicycle, _super);
+    function bicycle(year, model, color, seats, kilometers, type) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+        _this.type = "";
+        _this.type = type;
+        return _this;
     }
-    return bike;
+    return bicycle;
 }(vehicles));
 var boats = /** @class */ (function (_super) {
     __extends(boats, _super);
-    function boats() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function boats(year, model, color, seats, kilometers, type, size) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+        _this.type = "";
+        _this.size = "";
+        _this.type = type;
+        _this.size = size;
+        return _this;
     }
     return boats;
 }(vehicles));
 var horse = /** @class */ (function (_super) {
     __extends(horse, _super);
-    function horse() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function horse(year, model, color, seats, kilometers, species, power) {
+        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+        _this.species = "";
+        _this.power = "";
+        _this.species = species;
+        _this.power = power;
+        return _this;
     }
     return horse;
 }(vehicles));
