@@ -11,6 +11,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var vehicleimages = ["img/bmw.jpg", "img/honda.jpg", "img/truck.jpg"];
+for (var value in vehicleimages) {
+    var outerDiv = document.createElement("div");
+    outerDiv.setAttribute("class", "images");
+    var image = document.createElement("img");
+    image.setAttribute("src", vehicleimages[value]);
+    outerDiv.appendChild(image);
+    document.getElementById("vehicleimages").append(outerDiv);
+}
 var vehicles = /** @class */ (function () {
     function vehicles(year, model, color, seats, kilometers) {
         this.productionYear = "";
@@ -25,22 +34,20 @@ var vehicles = /** @class */ (function () {
         this.kilometers = kilometers;
     }
     vehicles.prototype.infos = function () {
-        return "The production Year is " + this.productionYear + ".<br>\n\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
+        return "<div class=\"alldata\">The production Year is " + this.productionYear + ".<br>\n\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
     };
     return vehicles;
 }());
-var test = new vehicles("2010", "bmw", "black", "4", "100000");
-document.write(test.infos());
 var Motorbike = /** @class */ (function (_super) {
     __extends(Motorbike, _super);
-    function Motorbike(year, model, color, seats, kilometers, engine) {
+    function Motorbike(year, model, color, seats, kilometers, handlebar) {
         var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.engine = "";
-        _this.engine = engine;
+        _this.handlebar = "";
+        _this.handlebar = handlebar;
         return _this;
     }
     Motorbike.prototype.motorOutput = function () {
-        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.engine + " engine.";
+        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.handlebar + " handlebar.</div>";
     };
     return Motorbike;
 }(vehicles));
@@ -48,10 +55,12 @@ var motortest = new Motorbike("2009", "honda", "black", "1", "20000", "good");
 document.write(motortest.motorOutput());
 var Truck = /** @class */ (function (_super) {
     __extends(Truck, _super);
-    function Truck(year, model, color, seats, kilometers, engine) {
+    function Truck(year, model, color, seats, kilometers, trailer, weight) {
         var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.engine = "";
-        _this.engine = engine;
+        _this.trailer = "";
+        _this.weight = "";
+        _this.trailer = trailer;
+        _this.weight = weight;
         return _this;
     }
     return Truck;

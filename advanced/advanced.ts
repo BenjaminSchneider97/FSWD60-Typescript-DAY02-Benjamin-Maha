@@ -1,3 +1,13 @@
+let vehicleimages : Array<string> = ["img/bmw.jpg", "img/honda.jpg", "img/truck.jpg"];
+for(let value in vehicleimages){
+	var outerDiv = document.createElement("div");
+	outerDiv.setAttribute("class", "images");
+	var image = document.createElement("img");
+	image.setAttribute("src", vehicleimages[value]);
+	outerDiv.appendChild(image);
+	document.getElementById("vehicleimages").append(outerDiv);
+}
+
 class vehicles {
 	productionYear = "";
 	model = "";
@@ -13,7 +23,7 @@ class vehicles {
 		this.kilometers = kilometers;
 	}
 	infos(){
-		return `The production Year is ${this.productionYear}.<br>
+		return `<div class="alldata">The production Year is ${this.productionYear}.<br>
 				The model is ${this.model}.<br>
 				The color of your vehicle is ${this.color}.<br>
 				Your vehicle hast ${this.seats} seats.<br>
@@ -21,31 +31,48 @@ class vehicles {
 	}
 
 }
-var test = new vehicles("2010", "bmw", "black", "4", "100000");
-document.write(test.infos());
 
 class Motorbike extends vehicles{
-	engine="";
+	handlebar="";
 
-	constructor(year, model, color, seats, kilometers, engine){
+	constructor(year, model, color, seats, kilometers, handlebar){
 		super(year, model, color, seats, kilometers);
-		this.engine = engine;
+		this.handlebar = handlebar;
 	}
 	motorOutput(){
-		return `${super.infos()} Your vehicle is a Motorbike and has an ${this.engine} engine.`
+		return `${super.infos()} Your vehicle is a Motorbike and has an ${this.handlebar} handlebar.</div>`
 	}
 }
 var motortest = new Motorbike("2009", "honda", "black", "1", "20000", "good");
 document.write(motortest.motorOutput());
 
 class Truck extends vehicles{
-	engine="";
+	trailer = "";
+	weight = "";
 
-	constructor(year, model, color, seats, kilometers, engine){
+	constructor(year, model, color, seats, kilometers, trailer, weight){
 		super(year, model, color, seats, kilometers);
-		this.engine = engine;
+		this.trailer = trailer;
+		this.weight = weight;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class cars extends vehicles{
 	engine = "";
 	horsepower = "";
