@@ -1,0 +1,1 @@
+import{ person, data } from "basic2";

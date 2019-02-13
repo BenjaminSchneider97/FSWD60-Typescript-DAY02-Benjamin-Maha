@@ -30,3 +30,6 @@ var info = new data("Ben", "19", "Developer", "7000$", "Paris");
 var info2 = new data ("maha", "17", "developer", "2000$", "Dubai");
 document.write(info.fullsentence());
 document.write (info2.fullsentence());
+
+
+export{ person, data };

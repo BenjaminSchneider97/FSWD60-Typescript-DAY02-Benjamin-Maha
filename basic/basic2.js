@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,6 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+exports.__esModule = true;
 var person = /** @class */ (function () {
     function person(name, age, JobTitle) {
         this.name = "";
@@ -25,6 +27,7 @@ var person = /** @class */ (function () {
     };
     return person;
 }());
+exports.person = person;
 var data = /** @class */ (function (_super) {
     __extends(data, _super);
     function data(name, age, JobTitle, salary, jobLocation) {
@@ -40,6 +43,7 @@ var data = /** @class */ (function (_super) {
     };
     return data;
 }(person));
+exports.data = data;
 var info = new data("Ben", "19", "Developer", "7000$", "Paris");
 var info2 = new data("maha", "17", "developer", "2000$", "Dubai");
 document.write(info.fullsentence());
