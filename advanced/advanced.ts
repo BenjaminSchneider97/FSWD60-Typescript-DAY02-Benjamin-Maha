@@ -1,9 +1,9 @@
 class vehicles {
-	productionYear = "";
+	productionYear : number;
 	model = "";
 	color = "";
-	seats = "";
-	kilometers = "";
+	seats : number;
+	kilometers : number;
 	img = "";
 
 	constructor(year, model, color, seats, kilometers, img){
@@ -14,18 +14,10 @@ class vehicles {
 		this.kilometers = kilometers;
 		this.img = img;
 	}
-	infos(){
-		return `<div class="alldata">
-					<img src="${this.img}"><br>
-					<button class="descbtn" onclick="toggledesc()">Show description</button>
-					<div class="description">
-					The production Year is ${this.productionYear}.<br>
-					The model is ${this.model}.<br>
-					The color of your vehicle is ${this.color}.<br>
-					Your vehicle hast ${this.seats} seats.<br>
-					Your vehicle has ${this.kilometers} kilometers.<br>`
-	}
 
+	calcPrice(){
+			return ((this.seats*3)+(this.kilometers*3)+this.productionYear);
+		}
 }
 
 class Motorbike extends vehicles{
@@ -35,9 +27,6 @@ class Motorbike extends vehicles{
 	constructor(year, model, color, seats, kilometers, img, handlebar){
 		super(year, model, color, seats, kilometers, img);
 		this.handlebar = handlebar;
-	}
-	motorOutput(){
-		return `${super.infos()} Your vehicle is a Motorbike and has an ${this.handlebar} handlebar.</div></div>`
 	}
 }
 
@@ -50,71 +39,38 @@ class Truck extends vehicles{
 		this.trailer = trailer;
 		this.weight = weight;
 	}
-	truckOutput(){
-		return `${super.infos()} Your vehicle is a Truck and has ${this.trailer} trailers and a max weight of ${this.weight}!</div></div>`
-	}
 }
 
-var motorbike1 = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
-var motorbike2 = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
-var truck1 = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
-var truck2 = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
 
-document.write(motorbike1.motorOutput());
+var allvehicles = new Array();
 
-$(".descbtn").on("click", function(){
-	var a = $(".description");
-	a.fadeIn(200);
-})
+allvehicles[0] = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
+allvehicles[1] = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
+allvehicles[2] = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
+allvehicles[3] = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*class cars extends vehicles{
-	engine = "";
-	horsepower = "";
-
-	constructor(year, model, color, seats, kilometers, engine, horsepower){
-		super(year, model, color, seats, kilometers);
-		this.engine = engine;
-		this.horsepower = horsepower;
-	}
-}	
-class bicycle extends vehicles{
-	type = "";
-
-	constructor(year, model, color, seats, kilometers, type){
-		super(year, model, color, seats, kilometers);
-		this.type = type;
-	}
+for(let value in allvehicles){
+	document.getElementById("vehicles").innerHTML +=`
+		<div class="alldata" id="vehicle` + [value] + `">
+			<div class="imgbtn">
+				<img src='img/` + value + `.jpg'>
+				<button class="descbtn" id="` + value + `">Show price</button>
+			</div>
+			<div class="description">
+				<p>The production Year is ` + allvehicles[value].productionYear + `.</p>
+				<p>The model is ` + allvehicles[value].model + `.</p>
+				<p>The color of your vehicle is ` + allvehicles[value].color + `.</p>
+				<p>Your vehicle has ` + allvehicles[value].seats + ` seat(s).</p>
+				<p>Your vehicle has ` + allvehicles[value].kilometers + ` kilometers.</p>
+			</div>
+		</div>
+	`
 }
-class boats extends vehicles{
-	type = "";
-	size = "";
-
-	constructor(year, model, color, seats, kilometers, type, size){
-		super(year, model, color, seats, kilometers);
-		this.type = type;
-		this.size = size;
-	}
+for (let value in allvehicles) {
+	document.getElementById(value).addEventListener('click', function(){priceoutput(this.getAttribute("id"));},false);
 }
-class horse extends vehicles{
-	species = "";
-	power = "";
 
-	constructor(year, model, color, seats, kilometers, species, power){
-		super(year, model, color, seats, kilometers);
-		this.species = species;
-		this.power = power;
-	}
-}*/
+function priceoutput(id){
+	document.getElementById("vehicle"+id).innerHTML +=  "<p>Current Market Price is: €" + allvehicles[id].calcPrice() + "</p><br>";
+
+}

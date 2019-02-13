@@ -13,11 +13,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var vehicles = /** @class */ (function () {
     function vehicles(year, model, color, seats, kilometers, img) {
-        this.productionYear = "";
         this.model = "";
         this.color = "";
-        this.seats = "";
-        this.kilometers = "";
         this.img = "";
         this.productionYear = year;
         this.model = model;
@@ -26,8 +23,8 @@ var vehicles = /** @class */ (function () {
         this.kilometers = kilometers;
         this.img = img;
     }
-    vehicles.prototype.infos = function () {
-        return "<div class=\"alldata\">\n\t\t\t\t\t<img src=\"" + this.img + "\"><br>\n\t\t\t\t\t<button class=\"descbtn\" onclick=\"toggledesc()\">Show description</button>\n\t\t\t\t\t<div class=\"description\">\n\t\t\t\t\tThe production Year is " + this.productionYear + ".<br>\n\t\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
+    vehicles.prototype.calcPrice = function () {
+        return ((this.seats * 3) + (this.kilometers * 3) + this.productionYear);
     };
     return vehicles;
 }());
@@ -39,9 +36,6 @@ var Motorbike = /** @class */ (function (_super) {
         _this.handlebar = handlebar;
         return _this;
     }
-    Motorbike.prototype.motorOutput = function () {
-        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.handlebar + " handlebar.</div></div>";
-    };
     return Motorbike;
 }(vehicles));
 var Truck = /** @class */ (function (_super) {
@@ -54,55 +48,19 @@ var Truck = /** @class */ (function (_super) {
         _this.weight = weight;
         return _this;
     }
-    Truck.prototype.truckOutput = function () {
-        return _super.prototype.infos.call(this) + " Your vehicle is a Truck and has " + this.trailer + " trailers and a max weight of " + this.weight + "!</div></div>";
-    };
     return Truck;
 }(vehicles));
-var motorbike1 = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
-var motorbike2 = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
-var truck1 = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
-var truck2 = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
-document.write(motorbike1.motorOutput());
-$(".descbtn").on("click", function () {
-    var a = $(".description");
-    a.fadeIn(200);
-});
-/*class cars extends vehicles{
-    engine = "";
-    horsepower = "";
-
-    constructor(year, model, color, seats, kilometers, engine, horsepower){
-        super(year, model, color, seats, kilometers);
-        this.engine = engine;
-        this.horsepower = horsepower;
-    }
+var allvehicles = new Array();
+allvehicles[0] = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
+allvehicles[1] = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
+allvehicles[2] = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
+allvehicles[3] = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
+for (var value in allvehicles) {
+    document.getElementById("vehicles").innerHTML += "\n\t\t<div class=\"alldata\" id=\"vehicle" + [value] + "\">\n\t\t\t<div class=\"imgbtn\">\n\t\t\t\t<img src='img/" + value + ".jpg'>\n\t\t\t\t<button class=\"descbtn\" id=\"" + value + "\">Show price</button>\n\t\t\t</div>\n\t\t\t<div class=\"description\">\n\t\t\t\t<p>The production Year is " + allvehicles[value].productionYear + ".</p>\n\t\t\t\t<p>The model is " + allvehicles[value].model + ".</p>\n\t\t\t\t<p>The color of your vehicle is " + allvehicles[value].color + ".</p>\n\t\t\t\t<p>Your vehicle has " + allvehicles[value].seats + " seat(s).</p>\n\t\t\t\t<p>Your vehicle has " + allvehicles[value].kilometers + " kilometers.</p>\n\t\t\t</div>\n\t\t</div>\n\t";
 }
-class bicycle extends vehicles{
-    type = "";
-
-    constructor(year, model, color, seats, kilometers, type){
-        super(year, model, color, seats, kilometers);
-        this.type = type;
-    }
+for (var value in allvehicles) {
+    document.getElementById(value).addEventListener('click', function () { priceoutput(this.getAttribute("id")); }, false);
 }
-class boats extends vehicles{
-    type = "";
-    size = "";
-
-    constructor(year, model, color, seats, kilometers, type, size){
-        super(year, model, color, seats, kilometers);
-        this.type = type;
-        this.size = size;
-    }
+function priceoutput(id) {
+    document.getElementById("vehicle" + id).innerHTML += "<p>Current Market Price is: €" + allvehicles[id].calcPrice() + "</p><br>";
 }
-class horse extends vehicles{
-    species = "";
-    power = "";
-
-    constructor(year, model, color, seats, kilometers, species, power){
-        super(year, model, color, seats, kilometers);
-        this.species = species;
-        this.power = power;
-    }
-}*/ 
