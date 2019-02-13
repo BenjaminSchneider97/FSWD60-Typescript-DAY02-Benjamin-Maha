@@ -11,103 +11,98 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var vehicleimages = ["img/bmw.jpg", "img/honda.jpg", "img/truck.jpg"];
-for (var value in vehicleimages) {
-    var outerDiv = document.createElement("div");
-    outerDiv.setAttribute("class", "images");
-    var image = document.createElement("img");
-    image.setAttribute("src", vehicleimages[value]);
-    outerDiv.appendChild(image);
-    document.getElementById("vehicleimages").append(outerDiv);
-}
 var vehicles = /** @class */ (function () {
-    function vehicles(year, model, color, seats, kilometers) {
+    function vehicles(year, model, color, seats, kilometers, img) {
         this.productionYear = "";
         this.model = "";
         this.color = "";
         this.seats = "";
         this.kilometers = "";
+        this.img = "";
         this.productionYear = year;
         this.model = model;
         this.color = color;
         this.seats = seats;
         this.kilometers = kilometers;
+        this.img = img;
     }
     vehicles.prototype.infos = function () {
-        return "<div class=\"alldata\">The production Year is " + this.productionYear + ".<br>\n\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
+        return "<div class=\"alldata\">\n\t\t\t\t\t<img src=\"" + this.img + "\"><br>\n\t\t\t\t\t<button class=\"descbtn\" onclick=\"toggledesc()\">Show description</button>\n\t\t\t\t\t<div class=\"description\">\n\t\t\t\t\tThe production Year is " + this.productionYear + ".<br>\n\t\t\t\t\tThe model is " + this.model + ".<br>\n\t\t\t\t\tThe color of your vehicle is " + this.color + ".<br>\n\t\t\t\t\tYour vehicle hast " + this.seats + " seats.<br>\n\t\t\t\t\tYour vehicle has " + this.kilometers + " kilometers.<br>";
     };
     return vehicles;
 }());
 var Motorbike = /** @class */ (function (_super) {
     __extends(Motorbike, _super);
-    function Motorbike(year, model, color, seats, kilometers, handlebar) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+    function Motorbike(year, model, color, seats, kilometers, img, handlebar) {
+        var _this = _super.call(this, year, model, color, seats, kilometers, img) || this;
         _this.handlebar = "";
         _this.handlebar = handlebar;
         return _this;
     }
     Motorbike.prototype.motorOutput = function () {
-        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.handlebar + " handlebar.</div>";
+        return _super.prototype.infos.call(this) + " Your vehicle is a Motorbike and has an " + this.handlebar + " handlebar.</div></div>";
     };
     return Motorbike;
 }(vehicles));
-var motortest = new Motorbike("2009", "honda", "black", "1", "20000", "good");
-document.write(motortest.motorOutput());
 var Truck = /** @class */ (function (_super) {
     __extends(Truck, _super);
-    function Truck(year, model, color, seats, kilometers, trailer, weight) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
+    function Truck(year, model, color, seats, kilometers, img, trailer, weight) {
+        var _this = _super.call(this, year, model, color, seats, kilometers, img) || this;
         _this.trailer = "";
         _this.weight = "";
         _this.trailer = trailer;
         _this.weight = weight;
         return _this;
     }
+    Truck.prototype.truckOutput = function () {
+        return _super.prototype.infos.call(this) + " Your vehicle is a Truck and has " + this.trailer + " trailers and a max weight of " + this.weight + "!</div></div>";
+    };
     return Truck;
 }(vehicles));
-var cars = /** @class */ (function (_super) {
-    __extends(cars, _super);
-    function cars(year, model, color, seats, kilometers, engine, horsepower) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.engine = "";
-        _this.horsepower = "";
-        _this.engine = engine;
-        _this.horsepower = horsepower;
-        return _this;
+var motorbike1 = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
+var motorbike2 = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
+var truck1 = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
+var truck2 = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
+document.write(motorbike1.motorOutput());
+$(".descbtn").on("click", function () {
+    var a = $(".description");
+    a.fadeIn(200);
+});
+/*class cars extends vehicles{
+    engine = "";
+    horsepower = "";
+
+    constructor(year, model, color, seats, kilometers, engine, horsepower){
+        super(year, model, color, seats, kilometers);
+        this.engine = engine;
+        this.horsepower = horsepower;
     }
-    return cars;
-}(vehicles));
-var bicycle = /** @class */ (function (_super) {
-    __extends(bicycle, _super);
-    function bicycle(year, model, color, seats, kilometers, type) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.type = "";
-        _this.type = type;
-        return _this;
+}
+class bicycle extends vehicles{
+    type = "";
+
+    constructor(year, model, color, seats, kilometers, type){
+        super(year, model, color, seats, kilometers);
+        this.type = type;
     }
-    return bicycle;
-}(vehicles));
-var boats = /** @class */ (function (_super) {
-    __extends(boats, _super);
-    function boats(year, model, color, seats, kilometers, type, size) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.type = "";
-        _this.size = "";
-        _this.type = type;
-        _this.size = size;
-        return _this;
+}
+class boats extends vehicles{
+    type = "";
+    size = "";
+
+    constructor(year, model, color, seats, kilometers, type, size){
+        super(year, model, color, seats, kilometers);
+        this.type = type;
+        this.size = size;
     }
-    return boats;
-}(vehicles));
-var horse = /** @class */ (function (_super) {
-    __extends(horse, _super);
-    function horse(year, model, color, seats, kilometers, species, power) {
-        var _this = _super.call(this, year, model, color, seats, kilometers) || this;
-        _this.species = "";
-        _this.power = "";
-        _this.species = species;
-        _this.power = power;
-        return _this;
+}
+class horse extends vehicles{
+    species = "";
+    power = "";
+
+    constructor(year, model, color, seats, kilometers, species, power){
+        super(year, model, color, seats, kilometers);
+        this.species = species;
+        this.power = power;
     }
-    return horse;
-}(vehicles));
+}*/ 

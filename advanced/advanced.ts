@@ -1,33 +1,29 @@
-let vehicleimages : Array<string> = ["img/bmw.jpg", "img/honda.jpg", "img/truck.jpg"];
-for(let value in vehicleimages){
-	var outerDiv = document.createElement("div");
-	outerDiv.setAttribute("class", "images");
-	var image = document.createElement("img");
-	image.setAttribute("src", vehicleimages[value]);
-	outerDiv.appendChild(image);
-	document.getElementById("vehicleimages").append(outerDiv);
-}
-
 class vehicles {
 	productionYear = "";
 	model = "";
 	color = "";
 	seats = "";
 	kilometers = "";
+	img = "";
 
-	constructor(year, model, color, seats, kilometers){
+	constructor(year, model, color, seats, kilometers, img){
 		this.productionYear = year;
 		this.model = model;
 		this.color = color;
 		this.seats = seats;
 		this.kilometers = kilometers;
+		this.img = img;
 	}
 	infos(){
-		return `<div class="alldata">The production Year is ${this.productionYear}.<br>
-				The model is ${this.model}.<br>
-				The color of your vehicle is ${this.color}.<br>
-				Your vehicle hast ${this.seats} seats.<br>
-				Your vehicle has ${this.kilometers} kilometers.<br>`
+		return `<div class="alldata">
+					<img src="${this.img}"><br>
+					<button class="descbtn" onclick="toggledesc()">Show description</button>
+					<div class="description">
+					The production Year is ${this.productionYear}.<br>
+					The model is ${this.model}.<br>
+					The color of your vehicle is ${this.color}.<br>
+					Your vehicle hast ${this.seats} seats.<br>
+					Your vehicle has ${this.kilometers} kilometers.<br>`
 	}
 
 }
@@ -35,28 +31,41 @@ class vehicles {
 class Motorbike extends vehicles{
 	handlebar="";
 
-	constructor(year, model, color, seats, kilometers, handlebar){
-		super(year, model, color, seats, kilometers);
+
+	constructor(year, model, color, seats, kilometers, img, handlebar){
+		super(year, model, color, seats, kilometers, img);
 		this.handlebar = handlebar;
 	}
 	motorOutput(){
-		return `${super.infos()} Your vehicle is a Motorbike and has an ${this.handlebar} handlebar.</div>`
+		return `${super.infos()} Your vehicle is a Motorbike and has an ${this.handlebar} handlebar.</div></div>`
 	}
 }
-var motortest = new Motorbike("2009", "honda", "black", "1", "20000", "good");
-document.write(motortest.motorOutput());
 
 class Truck extends vehicles{
 	trailer = "";
 	weight = "";
 
-	constructor(year, model, color, seats, kilometers, trailer, weight){
-		super(year, model, color, seats, kilometers);
+	constructor(year, model, color, seats, kilometers, img, trailer, weight){
+		super(year, model, color, seats, kilometers, img);
 		this.trailer = trailer;
 		this.weight = weight;
 	}
+	truckOutput(){
+		return `${super.infos()} Your vehicle is a Truck and has ${this.trailer} trailers and a max weight of ${this.weight}!</div></div>`
+	}
 }
 
+var motorbike1 = new Motorbike(2009, "Honda", "black", 1, 20000, "img/honda.jpg", "good");
+var motorbike2 = new Motorbike(2015, "Yamaha", "black", 1, 3000, "img/bike.png", "nice");
+var truck1 = new Truck(2016, "Ford", "black", 2, 15000, "img/truck.png", 1, "1.5t");
+var truck2 = new Truck(2014, "Chevrolet", "darkblue", 4, 10000, "img/truck2.png", 1, "2t");
+
+document.write(motorbike1.motorOutput());
+
+$(".descbtn").on("click", function(){
+	var a = $(".description");
+	a.fadeIn(200);
+})
 
 
 
@@ -71,9 +80,7 @@ class Truck extends vehicles{
 
 
 
-
-
-class cars extends vehicles{
+/*class cars extends vehicles{
 	engine = "";
 	horsepower = "";
 
@@ -110,4 +117,4 @@ class horse extends vehicles{
 		this.species = species;
 		this.power = power;
 	}
-}
+}*/
