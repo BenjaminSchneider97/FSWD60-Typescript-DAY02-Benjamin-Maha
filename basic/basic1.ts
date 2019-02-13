@@ -17,3 +17,5 @@ var fullstring = new person("Maha", "20", "Developer");
 var fullstring2 = new person("Ben", "19", "Developer");
 console.log(fullstring.string());
 console.log(fullstring2.string());
+
+export { person , fullstring }

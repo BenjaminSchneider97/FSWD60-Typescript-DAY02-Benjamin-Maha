@@ -36,7 +36,7 @@ var data = /** @class */ (function (_super) {
         return _this;
     }
     data.prototype.fullsentence = function () {
-        return " " + _super.prototype.string.call(this) + " and I get " + this.salary + " every month, and I work in " + this.jobLocation;
+        return _super.prototype.string.call(this) + " and I get " + this.salary + " every month, and I work in " + this.jobLocation + "<br>";
     };
     return data;
 }(person));

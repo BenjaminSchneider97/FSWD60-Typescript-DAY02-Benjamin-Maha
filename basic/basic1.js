@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var person = /** @class */ (function () {
     function person(name, age, JobTitle) {
         this.name = "";
@@ -12,7 +14,9 @@ var person = /** @class */ (function () {
     };
     return person;
 }());
+exports.person = person;
 var fullstring = new person("Maha", "20", "Developer");
+exports.fullstring = fullstring;
 var fullstring2 = new person("Ben", "19", "Developer");
 console.log(fullstring.string());
 console.log(fullstring2.string());

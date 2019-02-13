@@ -22,7 +22,7 @@ class data extends person {
 		this.jobLocation = jobLocation;
 	}
 	fullsentence(){
-		return ` ${super.string()} and I get ${this.salary} every month, and I work in ${this.jobLocation}`
+		return `${super.string()} and I get ${this.salary} every month, and I work in ${this.jobLocation}<br>`
 	}
 }
 
